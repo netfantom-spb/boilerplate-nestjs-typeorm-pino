@@ -1,1 +1,3 @@
-# boilerplate-nestjs-typeorm-pino
+nestjs
+typeorm
+nestjs-pino
