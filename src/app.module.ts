@@ -31,21 +31,16 @@ import { ScheduleModule } from '@nestjs/schedule';
               options: { destination: './logs/root.log' },
             },
             {
-              level: 'trace',
+              level: 'info',
               target: 'pino-pretty',
               options: {
-                singleLine: true,
-                //   destination: 1,
+                colorize: true,
+                colorizeObjects: true,
+                singleLine: false,
               },
             },
           ],
         },
-        // transport: {
-        //   target: 'pino-pretty',
-        //   options: {
-        //     singleLine: true,
-        //   },
-        // },
       },
     }),
 
@@ -56,7 +51,9 @@ import { ScheduleModule } from '@nestjs/schedule';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DBNAME,
-      entities: [],
+      // entities: [],
+      autoLoadEntities: true,
+      schema: 'public',
       synchronize: false,
       logging: false,
       logger: 'advanced-console',
