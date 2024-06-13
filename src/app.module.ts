@@ -11,6 +11,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -43,6 +44,8 @@ import { ScheduleModule } from '@nestjs/schedule';
         },
       },
     }),
+
+    CacheModule.register(),
 
     TypeOrmModule.forRoot({
       type: 'postgres',
