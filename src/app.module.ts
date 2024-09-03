@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
+import { TestModule } from './modules/api/test/test.module';
 
 @Module({
   imports: [
@@ -54,15 +55,15 @@ import { CacheModule } from '@nestjs/cache-manager';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DBNAME,
-      // entities: [],
       autoLoadEntities: true,
-      schema: 'public',
-      synchronize: false,
-      logging: false,
+      synchronize: true,
+      logging: true,
       logger: 'advanced-console',
     }),
 
     ScheduleModule.forRoot(),
+
+    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
