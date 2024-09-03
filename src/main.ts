@@ -9,11 +9,10 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
-import { TestModule } from './modules/api/test/test.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['debug'],
+    logger: ['debug', 'warn', 'error'],
     bufferLogs: true,
   });
 

@@ -33,6 +33,11 @@ import { TestModule } from './modules/api/test/test.module';
               options: { destination: './logs/root.log' },
             },
             {
+              level: 'error',
+              target: 'pino/file',
+              options: { destination: './logs/error.log' },
+            },
+            {
               level: 'info',
               target: 'pino-pretty',
               options: {
