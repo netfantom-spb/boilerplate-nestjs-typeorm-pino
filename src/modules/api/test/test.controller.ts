@@ -17,7 +17,6 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { TestDto } from './dto/test.dto';

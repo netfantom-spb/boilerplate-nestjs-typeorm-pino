@@ -39,7 +39,7 @@ export class TestService {
   }
 
   async remove(id: number) {
-    const item = await this.findOne(id); // check if record exists
+    await this.findOne(id); // check if record exists
     return this.repository.delete({ id });
   }
 }
