@@ -1,8 +1,13 @@
 {
-  "name": "nestjs-typeorm-pino-boilerplate",
+  "name": "nestjs-typeorm-pino-swagger-boilerplate",
   "version": "1.3.0",
-  "description": "",
-  "author": "",
+  "description": "Boilerplate NestJS + TypeOrm + Pino + Swagger",
+  "author": "Viktor Egorov",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netfantom-spb/boilerplate-nestjs-typeorm-pino.git"
+  },
+  "homepage": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
