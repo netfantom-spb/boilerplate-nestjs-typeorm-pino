@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { CreateTestDto } from './dto/create-test.dto';
 import { UpdateTestDto } from './dto/update-test.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,13 +6,25 @@ import { TestEntity } from './entities/test.entity';
 import { Repository } from 'typeorm';
 import { TestDto } from './dto/test.dto';
 import { plainToInstance } from 'class-transformer';
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 
 @Injectable()
-export class TestService {
+export class TestService implements OnModuleInit {
+  private readonly logger = new Logger(TestService.name);
+
   constructor(
+    @InjectPinoLogger(TestService.name)
+    private readonly pinoLogger: PinoLogger,
     @InjectRepository(TestEntity)
     private readonly repository: Repository<TestEntity>,
   ) {}
+
+  onModuleInit() {
+    this.logger.debug('Log DEBUG from standard logger');
+    this.logger.log('Log INFO from standard logger');
+    this.logger.warn('Log WARN from standard logger');
+    this.logger.error('Log ERROR from standard logger');
+  }
 
   async create(createTestDto: CreateTestDto): Promise<TestDto> {
     const newItem = this.repository.create({ ...createTestDto });

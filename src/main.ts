@@ -12,8 +12,12 @@ import {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['debug', 'warn', 'error'],
+    logger: ['debug'],
     bufferLogs: true,
+    autoFlushLogs: true,
+    forceCloseConnections: true,
+    snapshot: true,
+    abortOnError: true,
   });
 
   // Logger configuration
@@ -49,4 +53,7 @@ async function bootstrap() {
   const port: number = config.get('PORT') ? +config.get('PORT') : 3000;
   await app.listen(port);
 }
-bootstrap();
+bootstrap().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
