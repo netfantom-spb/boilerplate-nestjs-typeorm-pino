@@ -11,16 +11,16 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { TestService } from './test.service';
-import { CreateTestDto } from './dto/create-test.dto';
-import { UpdateTestDto } from './dto/update-test.dto';
 import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { TestDto } from './dto/test.dto';
 import { EntityNotFoundError, TypeORMError } from 'typeorm';
+import { TestDto } from './dto/test.dto';
+import { CreateTestDto } from './dto/create-test.dto';
+import { UpdateTestDto } from './dto/update-test.dto';
 
 @ApiTags('test')
 @Controller('test')

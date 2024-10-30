@@ -2,11 +2,13 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { CreateTestDto } from './dto/create-test.dto';
 import { UpdateTestDto } from './dto/update-test.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TestEntity } from './entities/test.entity';
 import { Repository } from 'typeorm';
 import { TestDto } from './dto/test.dto';
 import { plainToInstance } from 'class-transformer';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { TestEntity } from './entities/test.entity';
+import { NotFoundException, ServerException } from '@/exceptions/exception';
+import { ErrorCodeEnum } from '@/exceptions/error-code.enum';
 
 @Injectable()
 export class TestService implements OnModuleInit {
@@ -38,20 +40,37 @@ export class TestService implements OnModuleInit {
   }
 
   async findOne(id: number) {
-    return this.repository.findOneByOrFail({ id });
+    return this.repository.findOneByOrFail({ id })
+    .catch(error => {
+      this.logger.error(error);
+      throw new NotFoundException(`Record with ID ${id} not found`)
+    })
   }
 
   async update(id: number, updateTestDto: UpdateTestDto) {
     const item = await this.findOne(id); // check if record exists
+    if (!item) {
+      throw new NotFoundException(`Record with ID ${id} not found`);
+    }
     const updatedItem = {
       ...item,
       ...updateTestDto,
     };
-    return this.repository.save(updatedItem);
+    return this.repository.save(updatedItem).catch(error => {
+      this.logger.error(error);
+      throw new ServerException('Failed to update');
+    })
   }
 
   async remove(id: number) {
-    await this.findOne(id); // check if record exists
-    return this.repository.delete({ id });
+    const item = await this.findOne(id); // check if record exists
+    if (!item) {
+      throw new NotFoundException(`Record with ID ${id} not found`);
+    }
+    return this.repository.delete({ id }).catch(error => {
+      this.logger.error(error);
+      throw new ServerException('Failed to delete');
+    })
   }
+
 }

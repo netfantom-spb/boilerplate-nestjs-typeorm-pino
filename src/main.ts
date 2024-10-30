@@ -9,6 +9,7 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -19,6 +20,9 @@ async function bootstrap() {
     snapshot: true,
     abortOnError: true,
   });
+
+  // Exception configuration
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   // Logger configuration
   app.useLogger(app.get(Logger));

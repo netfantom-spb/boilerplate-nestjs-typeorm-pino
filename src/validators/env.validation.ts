@@ -2,7 +2,6 @@ import { ToBoolean } from '@/decorators/to-boolean';
 import { Expose, plainToInstance, Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsDefined,
   IsEnum,
   IsNumber,
   IsString,

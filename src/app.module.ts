@@ -18,6 +18,7 @@ import {
   validateEnvironmentVariables,
 } from './validators/env.validation';
 import { v4 as uuidv4 } from 'uuid';
+import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
 
 @Module({
   imports: [
@@ -108,6 +109,8 @@ import { v4 as uuidv4 } from 'uuid';
     ScheduleModule.forRoot(),
 
     TestModule,
+
+    TestExceptionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
