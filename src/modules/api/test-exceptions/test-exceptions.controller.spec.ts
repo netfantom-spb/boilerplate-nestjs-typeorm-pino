@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TestExceptionsController } from './test-exceptions.controller';
 import { TestExceptionsService } from './test-exceptions.service';
+import { LoggerModule } from 'nestjs-pino';
 
 describe('TestExceptionsController', () => {
   let controller: TestExceptionsController;

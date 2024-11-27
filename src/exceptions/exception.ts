@@ -7,19 +7,19 @@ export abstract class AppException extends Error{
 }
 
 export class ServerException extends AppException {
-    constructor(message: string, code: ErrorCodeEnum = ErrorCodeEnum.ServerError) {
+    constructor(message: string = 'Unknown server exception', code: ErrorCodeEnum = ErrorCodeEnum.ServerError) {
         super(message, code);
     }
 }
 
 export class ClientException extends AppException {
-    constructor(message: string, code: ErrorCodeEnum = ErrorCodeEnum.ClientError) {
+    constructor(message: string = 'Unknown client exception', code: ErrorCodeEnum = ErrorCodeEnum.ClientError) {
         super(message, code);
     }
 }
 
 export class NotFoundException extends AppException {
-    constructor(message: string, code: ErrorCodeEnum = ErrorCodeEnum.NotFound) {
+    constructor(message: string = 'Unknwn not found exception', code: ErrorCodeEnum = ErrorCodeEnum.NotFound) {
         super(message, code);
     }
 }

@@ -14,6 +14,7 @@ enum Environment {
   Development = 'development',
   Production = 'production',
   Staging = 'staging',
+  Test = 'test'
 }
 
 enum LogLevel {
@@ -23,9 +24,10 @@ enum LogLevel {
   Error = 'error',
 }
 
-export enum LogConsole {
+export enum LogType {
   Pretty = 'pretty',
-  Raw = 'raw',
+  Json = 'json',
+  None = 'none'
 }
 
 class EnvironmentVariables {
@@ -66,8 +68,12 @@ class EnvironmentVariables {
   LOG_LEVEL: LogLevel;
 
   @Expose()
-  @IsEnum(LogConsole)
-  LOG_CONSOLE: LogConsole;
+  @IsEnum(LogType)
+  LOG_CONSOLE: LogType;
+
+  @Expose()
+  @IsEnum(LogType)
+  LOG_FILE: LogType;
 
   @Expose()
   @IsBoolean()

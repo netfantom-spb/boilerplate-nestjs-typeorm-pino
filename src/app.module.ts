@@ -14,11 +14,80 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
 import { TestModule } from './modules/api/test/test.module';
 import {
-  LogConsole,
+  LogType,
   validateEnvironmentVariables,
 } from './validators/env.validation';
 import { v4 as uuidv4 } from 'uuid';
 import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
+import { LogLevel } from 'typeorm';
+
+/**
+ * Configure logging by environment variables
+ * @param logLevel {LogLevel} Logging level
+ * @param logFile {LogType} Log file format configuration
+ * @param logConsole {LogType} Log console format configuration
+ * @returns 
+ */
+const configureLogging = (logLevel: LogLevel, logFile: LogType, logConsole: LogType) => {
+  const config = [];
+
+  switch (logFile) {
+    case LogType.Pretty:
+      config.push({
+        level: logLevel,
+        target: 'pino-pretty',
+        options: { destination: './logs/root.log', colorize: false },
+      },);
+      config.push({
+        level: 'error',
+        target: 'pino-pretty',
+        options: { destination: './logs/error.log', colorize: false },
+      },);
+      break;
+    case LogType.Json:
+      config.push({
+        level: logLevel,
+        target: 'pino/file',
+        options: { destination: './logs/root.log' },
+      }, {
+        level: 'error',
+        target: 'pino/file',
+        options: { destination: './logs/error.log' },
+      },)
+      break;
+    case LogType.None:
+      console.warn('Logging in file is disabled');
+      break;
+  }
+
+  switch (logConsole) {
+    case LogType.Pretty:
+      config.push({
+        level: logLevel,
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          colorizeObjects: true,
+          singleLine: false,
+          sync: true,
+        },
+      })
+      break;
+    case LogType.Json:
+      config.push({
+        level: logLevel,
+        target: 'pino/file',
+        options: {
+          destination: 1,
+        },
+      },)
+      break;
+    case LogType.None:
+      console.warn('Logging in console is disabled');
+      break;
+  }
+  return config;
+}
 
 @Module({
   imports: [
@@ -39,36 +108,7 @@ import { TestExceptionsModule } from './modules/api/test-exceptions/test-excepti
           genReqId: (request) =>
             request.headers['x-correlation-id'] || uuidv4(),
           transport: {
-            targets: [
-              {
-                level: configService.get('LOG_LEVEL'),
-                target: 'pino/file',
-                options: { destination: './logs/root.log' },
-              },
-              {
-                level: 'error',
-                target: 'pino/file',
-                options: { destination: './logs/error.log', sync: true },
-              },
-              configService.get('LOG_CONSOLE') === LogConsole.Pretty
-                ? {
-                    level: configService.get('LOG_LEVEL'),
-                    target: 'pino-pretty',
-                    options: {
-                      colorize: true,
-                      colorizeObjects: true,
-                      singleLine: false,
-                      sync: true,
-                    },
-                  }
-                : {
-                    level: configService.get('LOG_LEVEL'),
-                    target: 'pino/file',
-                    options: {
-                      destination: 1,
-                    },
-                  },
-            ],
+            targets: configureLogging(configService.get('LOG_LEVEL'), configService.get('LOG_FILE'), configService.get('LOG_CONSOLE'))
           },
         },
       }),
@@ -76,18 +116,6 @@ import { TestExceptionsModule } from './modules/api/test-exceptions/test-excepti
 
     CacheModule.register(),
 
-    // TypeOrmModule.forRoot({
-    //   type: 'postgres',
-    //   host: process.env.PG_HOST,
-    //   port: Number.parseInt(process.env.PG_PORT, 10) || 5432,
-    //   username: process.env.PG_USER,
-    //   password: process.env.PG_PASSWORD,
-    //   database: process.env.PG_DBNAME,
-    //   autoLoadEntities: true,
-    //   synchronize: true,
-    //   logging: true,
-    //   logger: 'advanced-console',
-    // }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
