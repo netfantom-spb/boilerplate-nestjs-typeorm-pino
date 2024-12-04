@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { APP_VERSION, BUILD_DATE } from './version';
 
 @Injectable()
 export class AppService {
@@ -10,11 +11,7 @@ export class AppService {
     private readonly pinoLogger: PinoLogger,
   ) {}
 
-  getHello(): string {
-    const obj = { msg: 'I am Object' };
-    this.logger.debug({ obj }, 'Hello world');
-    this.pinoLogger.assign({ userID: '42' });
-    this.pinoLogger.trace({ obj }, 'Trace log', { obj });
-    return 'Hello World!';
+  getVersion() {
+      return {version: APP_VERSION, date: BUILD_DATE};
   }
 }

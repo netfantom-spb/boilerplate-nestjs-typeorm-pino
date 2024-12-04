@@ -53,10 +53,10 @@ import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer
     TestModule,
     TestExceptionsModule,
 
-    MessagingModule,
-    HelloProducerModule,
+    // MessagingModule,
+    // HelloProducerModule,
     MinutelyModule,
-    HelloConsumerModule,
+    // HelloConsumerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
