@@ -1,8 +1,10 @@
 /**
+ * @package boilerplate-nestjs-typeorm-pino
  * @summary configureDatabase function
  * @version 1.6
  * @description DB configuration
  */
+
 import { TypeOrmLoggerContainer } from "@/utils/type-orm-logger"
 import { ConfigService } from "@nestjs/config"
 import { TypeOrmModuleOptions } from "@nestjs/typeorm"

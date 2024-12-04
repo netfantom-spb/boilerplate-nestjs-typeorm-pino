@@ -1,7 +1,15 @@
+
+/**
+ * 
+ * @package boilerplate-nestjs-typeorm-pino
+ * @summary validateEnvironmentVariables function
+ * @version 1.6
+ * @description Validates environemt variables
+ * 
+ */
+
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-
-
 
 @Controller('/')
 export class AppController {

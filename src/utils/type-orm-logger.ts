@@ -1,10 +1,20 @@
+
+/**
+ * @package boilerplate-nestjs-typeorm-pino
+ * @summary Main logger
+ * @version 1.6
+ * @description  
+ * Do not change this file
+ * Effectively ripped out from:
+ * https://github.com/typeorm/typeorm/blob/master/src/logger/SimpleConsoleLogger.ts
+ */
+
 import { Logger as TypeOrmLogger, QueryRunner } from "typeorm";
 import { LoggerOptions as TypeOrmLoggerOptions } from "typeorm/logger/LoggerOptions";
 import { Logger } from "@nestjs/common";
 
 /**
- * Effectively ripped out from:
- * https://github.com/typeorm/typeorm/blob/master/src/logger/SimpleConsoleLogger.ts
+
  */
 export class TypeOrmLoggerContainer implements TypeOrmLogger {
   static ForConnection(connectionName: string, options: TypeOrmLoggerOptions) {

@@ -1,6 +1,4 @@
-export const APP_VERSION = '1.6.0';
-
-export const BUILD_DATE = '2024-12-04T07:21:40.558Z';
-
-export const COMMIT_HASH = 'null';
-
+export const APP_NAME = 'nestjs-typeorm-pino-swagger-boilerplate',
+APP_VERSION = '1.6.0',
+APP_BUILD_DATE = '2024-12-04T07:38:55.147Z',
+APP_COMMIT_HASH = '';

@@ -1,4 +1,5 @@
 /**
+ * @package boilerplate-nestjs-typeorm-pino
  * @summary EnvironmentVariablesDto class
  * @version 1.6
  * @description Environment Variables DTO from boilerplate. 

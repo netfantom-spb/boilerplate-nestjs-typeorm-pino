@@ -1,3 +1,9 @@
+/**
+ * @package boilerplate-nestjs-typeorm-pino
+ * @summary configureLoggingTransport function
+ * @version 1.6
+ * @summary Returns Pino transport configuration based on environment va
+ */
 import { RabbitHandlerConfig } from "@golevelup/nestjs-rabbitmq";
 import { RabbitMQExchangesDLXEnum, RabbitMQExchangesEnum } from "./configure-app-rabbitmq-exchanges";
 

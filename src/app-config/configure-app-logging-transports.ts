@@ -1,4 +1,5 @@
 /**
+ * @package boilerplate-nestjs-typeorm-pino
  * @summary configureLoggingTransport function
  * @version 1.6
  * @summary Returns Pino transport configuration based on environment va

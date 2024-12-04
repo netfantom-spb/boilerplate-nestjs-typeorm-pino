@@ -1,4 +1,5 @@
 /**
+ * @package boilerplate-nestjs-typeorm-pino
  * @summary EnvironmentVariablesAppDto class
  * @version 1.6
  * @description User defined evnironment variables for Application

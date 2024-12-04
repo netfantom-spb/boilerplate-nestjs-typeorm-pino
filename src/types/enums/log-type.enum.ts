@@ -1,4 +1,5 @@
 /**
+ * @package boilerplate-nestjs-typeorm-pino
  * @summary LogTypeEnum
  * @version 1.6
  * @description Log type values
