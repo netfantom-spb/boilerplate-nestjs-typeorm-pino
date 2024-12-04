@@ -1,0 +1,6 @@
+{
+    "name": "boilerplate-nestjs-typeorm-pino",
+    "version": "1.6",
+    "author": "Viktor Egorov",
+    "git": "git@github.com:netfantom-spb/boilerplate-nestjs-typeorm-pino.git"
+}
