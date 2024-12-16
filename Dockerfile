@@ -8,7 +8,8 @@ RUN npm -g update npm
 WORKDIR /build/backend
 COPY ["./package.json", "./package-lock.json", "./tsconfig.json", "./tsconfig.build.json", "./"]
 RUN npm i
-COPY ./src ./src 
+COPY ./src ./src
+COPY ./scripts ./scripts
 RUN npm run build
 
 # Service
