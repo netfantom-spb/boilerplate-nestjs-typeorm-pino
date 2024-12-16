@@ -1,0 +1,11 @@
+/app/logs/*.log {
+    hourly
+    rotate 10
+    size 10M
+    copytruncate
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+}

@@ -1,5 +1,9 @@
 # Builder
-FROM node:20-alpine3.18 AS Builder
+FROM node:20-alpine3.20 AS builder
+RUN apk update && \
+    apk upgrade && \
+    apk add tzdata && \
+    cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 RUN npm -g update npm
 WORKDIR /build/backend
 COPY ["./package.json", "./package-lock.json", "./tsconfig.json", "./tsconfig.build.json", "./"]
@@ -8,19 +12,35 @@ COPY ./src ./src
 RUN npm run build
 
 # Service
-FROM node:20-alpine3.18
-RUN apk update ; \
-    apk upgrade ; \
-    apk add tzdata bash; \
+FROM node:20-alpine3.20
+ARG DOCKER_USER
+ARG DOCKER_GROUP
+ARG DOCKER_USERNAME
+ARG DOCKER_GROUPNAME
+# prerare os
+RUN apk update && \
+    apk upgrade && \
+    apk add tzdata bash && \
     cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 RUN npm -g update npm
-RUN apk add openvpn iptables
+RUN apk add sudo
+RUN deluser --remove-home node && \
+    addgroup --gid ${DOCKER_GROUP} ${DOCKER_GROUPNAME} && \
+    adduser --uid ${DOCKER_USER} -G ${DOCKER_GROUPNAME} -H --disabled-password --gecos "" ${DOCKER_USERNAME} && \
+    echo "${DOCKER_USERNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${DOCKER_USERNAME} &&\
+    chmod 0440 /etc/sudoers.d/${DOCKER_USERNAME}
+# install and configure logrotate
+RUN apk add logrotate
+COPY ./app.logrotate /etc/logrotate.d/app.logrotate
+RUN ln -s /etc/periodic/daily/logrotate /etc/periodic/hourly/logrotate
+RUN ln -s /etc/periodic/daily/logrotate /etc/periodic/15min/logrotate
+# install and configure App
 WORKDIR /app
-COPY ["wait-for-it.sh", "./"]
-RUN chmod a+x "wait-for-it.sh"
-COPY ["./package.json", "./package-lock.json", "./"]
-RUN npm i --production --silent
-COPY --from=Builder /build/backend/dist ./
-# CMD ["node", "./main.js"]
-CMD [ "sh", "-c", "if [ -f /openvpn/client.ovpn ]; then openvpn --config /openvpn/client.ovpn --daemon > /app/logs/openvpn.log 2>&1; fi && iptables -A INPUT -i tun0 -j ACCEPT &&./wait-for-it.sh postgres:5432 -- node main.js" ]
+COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} --chmod=711 ["wait-for-it.sh", "./"]
+COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} ["./package.json", "./package-lock.json", "./"]
+RUN npm i --omit=dev --silent
+COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} --from=builder /build/backend/dist ./
+# Start services
+USER ${DOCKER_USER}:${DOCKER_GROUP}
+CMD [ "sh", "-c", "sudo crond -L /tmp/crond.log -l 0 -b ; ./wait-for-it.sh ${PG_HOST}:${PG_PORT} -- node main.js" ]
 EXPOSE 3000
