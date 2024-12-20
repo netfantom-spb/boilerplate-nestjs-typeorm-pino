@@ -1,5 +1,5 @@
 # Boilerplate 
-version 1.4
+version 1.9
 
 nestjs
 typeorm
