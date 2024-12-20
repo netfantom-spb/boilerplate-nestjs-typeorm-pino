@@ -6,6 +6,7 @@ typeorm
 nestjs-pino
 dayjs
 
-## ToDo
-* Auto serialization API DOT (form SS)
-* API generation (from Billing)
+## Changes
+### Version 1.9
+* Auto serialization API DTO
+* API generation with openapi
