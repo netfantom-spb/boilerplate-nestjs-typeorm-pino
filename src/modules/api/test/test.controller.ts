@@ -9,6 +9,9 @@ import {
   ParseIntPipe,
   HttpException,
   HttpStatus,
+  ClassSerializerInterceptor,
+  SerializeOptions,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TestService } from './test.service';
 import {
@@ -31,6 +34,11 @@ export class TestController {
     description: 'The record has been successfully created.',
     type: TestDto,
   })
+  @UseInterceptors(ClassSerializerInterceptor)
+  @SerializeOptions({
+    excludeExtraneousValues: true,
+    type: TestDto,
+  })
   @Post()
   async create(@Body() createTestDto: CreateTestDto): Promise<TestDto> {
     return this.testService.create(createTestDto);
@@ -39,6 +47,11 @@ export class TestController {
   @ApiOkResponse({
     description: 'Get all records',
     type: [TestDto],
+  })
+  @UseInterceptors(ClassSerializerInterceptor)
+  @SerializeOptions({
+    excludeExtraneousValues: true,
+    type: TestDto,
   })
   @Get()
   async findAll() {
@@ -50,6 +63,11 @@ export class TestController {
     type: TestDto,
   })
   @ApiNotFoundResponse({ description: 'Record not found' })
+  @UseInterceptors(ClassSerializerInterceptor)
+  @SerializeOptions({
+    excludeExtraneousValues: true,
+    type: TestDto,
+  })
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.testService.findOne(id).catch((error) => {
@@ -70,6 +88,11 @@ export class TestController {
     type: [TestDto],
   })
   @ApiNotFoundResponse({ description: 'Record not found' })
+  @UseInterceptors(ClassSerializerInterceptor)
+  @SerializeOptions({
+    excludeExtraneousValues: true,
+    type: TestDto,
+  })
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
