@@ -17,13 +17,19 @@ import { v4 as uuidv4 } from 'uuid';
  * @param logConsole {LogTypeEnum} Log console format configuration
  * @returns 
  */
-const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum, logConsole: LogTypeEnum) => {
+const configureLoggingTransport = (configService: ConfigService) => {
   const config = [];
+
+  const logLevel = configService.get<string>('LOG_LEVEL', LogLevelEnum.INFO), 
+    logLevelConsole = configService.get<string>('LOG_LEVEL_CONSOLE', logLevel),
+    logLevelFile = configService.get<string>('LOG_LEVEL_FILE', logLevel),
+    logConsole = configService.get<string>('LOG_CONSOLE', LogTypeEnum.PRETTY),
+    logFile = configService.get<string>('LOG_FILE', LogTypeEnum.NONE);
 
   switch (logFile) {
     case LogTypeEnum.PRETTY:
       config.push({
-        level: logLevel,
+        level: logLevelFile,
         target: 'pino-pretty',
         options: { destination: './logs/root.log', colorize: false },
       },);
@@ -35,7 +41,7 @@ const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum,
       break;
     case LogTypeEnum.JSON:
       config.push({
-        level: logLevel,
+        level: logLevelFile,
         target: 'pino/file',
         options: { destination: './logs/root.log' },
       }, {
@@ -45,14 +51,14 @@ const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum,
       },)
       break;
     case LogTypeEnum.NONE:
-      console.warn('Logging in file is disabled');
+      console.warn('Logging to file is disabled');
       break;
   }
 
   switch (logConsole) {
     case LogTypeEnum.PRETTY:
       config.push({
-        level: logLevel,
+        level: logLevelConsole,
         target: 'pino-pretty',
         options: {
           colorize: true,
@@ -64,7 +70,7 @@ const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum,
       break;
     case LogTypeEnum.JSON:
       config.push({
-        level: logLevel,
+        level: logLevelConsole,
         target: 'pino/file',
         options: {
           destination: 1,
@@ -72,7 +78,7 @@ const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum,
       },)
       break;
     case LogTypeEnum.NONE:
-      console.warn('Logging in console is disabled');
+      console.warn('Logging to console is disabled');
       break;
   }
   return config;
@@ -81,13 +87,15 @@ const configureLoggingTransport = (logLevel: LogLevelEnum, logFile: LogTypeEnum,
 export const configurePinoLoggerTargets = (configService: ConfigService): Params => {
   return {
     pinoHttp: {
-      level: 'trace',
+      level: configService.get<string>('LOG_LEVEL', 'trace'),
       useLevel: 'trace',
-      autoLogging: true,
+      quietReqLogger: true,
+      quietResLogger: true,
+      autoLogging: configService.get<boolean>('LOG_HTTP_REQUESTS', false),
       genReqId: (request) =>
         request.headers['x-correlation-id'] || uuidv4(),
       transport: {
-        targets: configureLoggingTransport(configService.get('LOG_LEVEL'), configService.get('LOG_FILE'), configService.get('LOG_CONSOLE'))
+        targets: configureLoggingTransport(configService)
       },
     },
   };
