@@ -1,4 +1,6 @@
 import {
+  Inject,
+  Logger,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -11,51 +13,65 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
 import { TestModule } from './modules/api/test/test.module';
-import {
-  validateEnvironmentVariables,
-} from './validators/env.validation';
+import { validateEnvironmentVariables } from './validators/env.validation';
 
 import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
-import { configurePinoLoggerTargets } from './app-config/configure-app-logging-transports';
-import { configureDatabase } from './app-config/configure-app-database';
+import { configurePinoLoggerTargets } from './bolireplate/configuration-helpers/configure-logging.helper';
+import { configureDatabasePgHelper } from './bolireplate/configuration-helpers/configure-database-pg.helper';
 import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
 import { MessagingModule } from './modules/rabbitmq/messaging.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/hello-peducer.module';
 import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
+    /**
+     * Load environment vaiables
+     */
     ConfigModule.forRoot({
-      envFilePath: ['.env.local', '.env'],
+      envFilePath: ['.env.global', '.env'],
       isGlobal: true,
       validate: validateEnvironmentVariables,
     }),
 
-    CacheModule.register(),
+    /**
+     * Configure logging
+     */
     LoggerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => configurePinoLoggerTargets(configService)
+      useFactory: (configService: ConfigService) =>
+        configurePinoLoggerTargets(configService),
     }),
 
+    /**
+     * Configure database connections
+     */
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => configureDatabase(configService),
+      useFactory: (configService: ConfigService) =>
+        configureDatabasePgHelper(configService, {
+          applicationName: 'example-application-name',
+          synchronize: true,
+        }),
     }),
 
+    // Cache module
+    CacheModule.register(),
 
+    // Shedule module
     ScheduleModule.forRoot(),
 
-
-    TestModule,
-    TestExceptionsModule,
-
+    // Example modules
+    // TestModule,
+    // TestExceptionsModule,
     // MessagingModule,
     // HelloProducerModule,
-    MinutelyModule,
+    // MinutelyModule,
     // HelloConsumerModule,
   ],
   controllers: [AppController],
@@ -65,7 +81,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
+      .forRoutes({ path: '/*', method: RequestMethod.ALL });
   }
 }
-

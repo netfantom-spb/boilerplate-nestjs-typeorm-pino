@@ -6,30 +6,19 @@ import { configureAppRabbitMQChannels } from '@/app-config/configure-app-rabbitm
 import { MessagingService } from './messaging.service';
 
 @Module({
-    imports: [
-        RabbitMQModule.forRootAsync(RabbitMQModule,
-            {
-                imports: [ConfigModule],
-                inject: [ConfigService],
-                useFactory: (configService: ConfigService) => ({
-                    exchanges: configureAppRabbitMQExchanges(configService),
-                    uri: configService.get('RABBITMQ_URL'),
-                    connectionInitOptions: {
-                        timeout: 10000,
-                        wait: false,
-                    },
-                    channels: configureAppRabbitMQChannels(configService),
-                })
-            }
-        ),
-    ],
-    providers: [MessagingService],
-    exports: [MessagingModule, MessagingService]
+  imports: [
+    RabbitMQModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        exchanges: configureAppRabbitMQExchanges(configService),
+        uri: configService.get('RABBITMQ_URL'),
+        connectionInitOptions: { timeout: 10000, wait: false },
+        channels: configureAppRabbitMQChannels(configService),
+      }),
+    }),
+  ],
+  providers: [MessagingService],
+  exports: [MessagingModule, MessagingService],
 })
-
-export class MessagingModule  {
-
-
-    
-
-}
+export class MessagingModule {}
