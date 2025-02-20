@@ -89,8 +89,8 @@ export const configurePinoLoggerTargets = (configService: ConfigService): Params
     pinoHttp: {
       level: configService.get<string>('LOG_LEVEL', 'trace'),
       useLevel: 'trace',
-      quietReqLogger: true,
-      quietResLogger: true,
+      quietReqLogger: !configService.get<boolean>('LOG_HTTP_REQUESTS', false),
+      quietResLogger: !configService.get<boolean>('LOG_HTTP_REQUESTS', false),
       autoLogging: configService.get<boolean>('LOG_HTTP_REQUESTS', false),
       genReqId: (request) =>
         request.headers['x-correlation-id'] || uuidv4(),

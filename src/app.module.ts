@@ -79,8 +79,8 @@ import { DataSource } from 'typeorm';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer
-    //   .apply(LoggerMiddleware)
-    //   .forRoutes({ path: '*path', method: RequestMethod.ALL });
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*path', method: RequestMethod.ALL });
   }
 }
