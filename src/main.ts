@@ -9,7 +9,7 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
-import { HttpExceptionFilter } from './exceptions/http-exception.filter';
+import { HttpExceptionFilter } from './bolireplate/filters/http-exception.filter';
 import { DataSource } from 'typeorm';
 
 async function bootstrap() {

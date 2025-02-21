@@ -4,8 +4,8 @@
  * @version 1.6
  * @summary Returns Pino transport configuration based on environment va
  */
-import { LogLevelEnum } from "@/types/enums/log-level.enum";
-import { LogTypeEnum } from "@/types/enums/log-type.enum";
+import { LogLevelEnum } from "@/bolireplate/types/enums/log-level.enum";
+import { LogTypeEnum } from "@/bolireplate/types/enums/log-type.enum";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { LoggerModule, Params } from "nestjs-pino";
 import { v4 as uuidv4 } from 'uuid';

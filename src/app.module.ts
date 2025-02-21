@@ -16,8 +16,8 @@ import { TestModule } from './modules/api/test/test.module';
 import { validateEnvironmentVariables } from './bolireplate/validators/env.validation';
 
 import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
-import { configurePinoLoggerTargets } from './bolireplate/configuration-helpers/configure-logging.helper';
-import { configureDatabasePgHelper } from './bolireplate/configuration-helpers/configure-database-pg.helper';
+import { configurePinoLoggerTargets } from './bolireplate/helpers/configuration/configure-logging.helper';
+import { configureDatabasePgHelper } from './bolireplate/helpers/configuration/configure-database-pg.helper';
 import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
 import { MessagingModule } from './modules/rabbitmq/messaging.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
