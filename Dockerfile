@@ -1,5 +1,5 @@
 # Builder
-FROM node:20-alpine3.20 AS builder
+FROM node:20-alpine3.21 AS builder
 RUN apk update && \
     apk upgrade && \
     apk add tzdata && \
@@ -13,7 +13,7 @@ COPY ./scripts ./scripts
 RUN npm run build
 
 # Service
-FROM node:20-alpine3.20
+FROM node:20-alpine3.21
 ARG DOCKER_USER
 ARG DOCKER_GROUP
 ARG DOCKER_USERNAME

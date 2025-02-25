@@ -9,7 +9,8 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
-import { HttpExceptionFilter } from './exceptions/http-exception.filter';
+import { HttpExceptionFilter } from './bolireplate/filters/http-exception.filter';
+import { DataSource } from 'typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -55,6 +56,7 @@ async function bootstrap() {
 
   const config = app.get(ConfigService);
   const port: number = config.get('PORT') ? +config.get('PORT') : 3000;
+  
   console.log(`Start app listen on :${port}`);
   await app.listen(port);
 }
