@@ -6,7 +6,7 @@
  * @description Validates environemt variables
  * 
  */
-import { EnvironmentVariablesAppDto } from '@/types/dto/environment-variables.app.dto';
+import { EnvironmentVariablesAppDto } from '@/bolireplate/types/dto/environment-variables.app.dto';
 import { plainToInstance, Transform, Type } from 'class-transformer';
 import {
   validateSync,

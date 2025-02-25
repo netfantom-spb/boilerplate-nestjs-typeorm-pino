@@ -1,5 +1,5 @@
 **/.env
-**/.env.local
+**/.env.global
 **/logs
 **/node_modules
 **/dist

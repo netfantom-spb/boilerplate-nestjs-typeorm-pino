@@ -6,11 +6,11 @@
  * Do not change this class, add your own properties to EnvironmentVariableAppDto instead.
  */
 
-import { IsBoolean, IsEnum, IsNumber, IsString, Max, Min } from "class-validator";
+import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, Max, Min } from "class-validator";
 import { LogLevelEnum } from "../enums/log-level.enum";
 import { NodeEnvEnum } from "../enums/node-env.enum";
 import { LogTypeEnum } from "../enums/log-type.enum";
-import { ToBoolean } from "@/decorators/to-boolean";
+import { ToBoolean } from "@/bolireplate/decorators/to-boolean";
 import { Expose } from "class-transformer";
 
 export class EnvironmentVariablesDto {
@@ -51,6 +51,16 @@ export class EnvironmentVariablesDto {
     LOG_LEVEL: LogLevelEnum;
 
     @Expose()
+    @IsEnum(LogLevelEnum)
+    @IsOptional()
+    LOG_LEVEL_CONSOLE: LogLevelEnum | null;
+
+    @Expose()
+    @IsEnum(LogLevelEnum)
+    @IsOptional()
+    LOG_LEVEL_FILE: LogLevelEnum | null;
+
+    @Expose()
     @IsEnum(LogTypeEnum)
     LOG_CONSOLE: LogTypeEnum;
 
@@ -62,4 +72,9 @@ export class EnvironmentVariablesDto {
     @IsBoolean()
     @ToBoolean()
     LOG_DB_QUERIES: boolean;
+
+    @Expose()
+    @IsBoolean()
+    @ToBoolean()
+    LOG_HTTP_REQUESTS: false;
 }
