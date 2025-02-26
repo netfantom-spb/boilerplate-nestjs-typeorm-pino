@@ -26,7 +26,7 @@ import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/
 import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
 import { DataSource } from 'typeorm';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-import { MetricsController } from './bolireplate/metrics/metrics.controller';
+import { MetricsController } from './bolireplate/modules/metrics/metrics.controller';
 
 @Module({
   imports: [
