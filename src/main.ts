@@ -30,7 +30,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
   // Api configuration
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', { exclude: ['/metrics'] });
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
@@ -56,7 +56,7 @@ async function bootstrap() {
 
   const config = app.get(ConfigService);
   const port: number = config.get('PORT') ? +config.get('PORT') : 3000;
-  
+
   console.log(`Start app listen on :${port}`);
   await app.listen(port);
 }
