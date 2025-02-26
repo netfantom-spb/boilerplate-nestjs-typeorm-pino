@@ -25,6 +25,8 @@ import { LoggerModule } from 'nestjs-pino';
 import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/hello-peducer.module';
 import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
 import { DataSource } from 'typeorm';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { MetricsController } from './bolireplate/metrics/metrics.controller';
 
 @Module({
   imports: [
@@ -58,6 +60,17 @@ import { DataSource } from 'typeorm';
           applicationName: 'example-application-name',
           synchronize: true,
         }),
+    }),
+
+    /**
+     * Prometheus metrics
+     */
+    PrometheusModule.register({
+      controller: MetricsController,
+      path: '/metrics',
+      defaultMetrics: {
+        enabled: true,
+      },
     }),
 
     // Cache module
