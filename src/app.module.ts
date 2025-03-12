@@ -58,7 +58,7 @@ import { MetricsController } from './bolireplate/modules/metrics/metrics.control
       useFactory: (configService: ConfigService) =>
         configureDatabasePgHelper(configService, {
           applicationName: 'example-application-name',
-          synchronize: true,
+          synchronize: false,
         }),
     }),
 
@@ -84,7 +84,7 @@ import { MetricsController } from './bolireplate/modules/metrics/metrics.control
     // TestExceptionsModule,
     // MessagingModule,
     // HelloProducerModule,
-    // MinutelyModule,
+    MinutelyModule,
     // HelloConsumerModule,
   ],
   controllers: [AppController],

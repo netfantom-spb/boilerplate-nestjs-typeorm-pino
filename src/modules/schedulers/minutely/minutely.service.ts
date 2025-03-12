@@ -17,7 +17,10 @@ export class MinutelyService implements OnModuleInit {
 
     async onModuleInit() {
         // If we want to run on App startup
-        return this.run();
+        setTimeout(() => {
+            return this.run();
+        }, 1000)
+        
     }
 
     //@Interval(60000)
@@ -40,7 +43,8 @@ export class MinutelyService implements OnModuleInit {
     }
 
     async execSome() {
-        this.logger.info('Do some task');
+        const data = {dummyData: 'This is dummy data'}
+        this.logger.info(data, 'Do some task');
         return this.helloProducerService.sendHelloMessage('Hello!');
     }
 }
