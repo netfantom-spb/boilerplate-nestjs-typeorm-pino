@@ -11,7 +11,7 @@ import {
   ClientException,
   NotFoundException,
   ServerException,
-} from '../../exceptions/exception';
+} from '../exceptions/exception';
 
 @Catch(AppException)
 export class HttpExceptionFilter implements ExceptionFilter {

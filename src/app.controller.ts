@@ -17,7 +17,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('version')
-  getHello() {
+  getVersion() {
     return this.appService.getVersion();
   }
 
