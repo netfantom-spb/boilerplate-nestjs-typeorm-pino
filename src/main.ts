@@ -41,7 +41,6 @@ async function bootstrap() {
       .setTitle('Service example')
       .setDescription('The example API description')
       .setVersion('1.0')
-      .addTag('test')
       .build(),
     swaggerDocumentOptions: SwaggerDocumentOptions = {
       // Uncomment if want to include only this modules
