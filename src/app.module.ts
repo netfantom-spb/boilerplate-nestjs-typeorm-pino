@@ -19,7 +19,7 @@ import { TestExceptionsModule } from './modules/api/test-exceptions/test-excepti
 import { configurePinoLoggerTargets } from './bolireplate/helpers/configuration/configure-logging.helper';
 import { configureDatabasePgHelper } from './bolireplate/helpers/configuration/configure-database-pg.helper';
 import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
-import { MessagingModule } from './modules/rabbitmq/messaging.module';
+import { MessagingModule } from './modules/rabbitmq/messaging/messaging.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/hello-peducer.module';

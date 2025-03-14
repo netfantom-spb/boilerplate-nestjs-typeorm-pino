@@ -2,7 +2,7 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { HelloMessageDto } from './dto/hello-message.dto';
-import { MessagingService } from '../../messaging.service';
+import { MessagingService } from '../../messaging/messaging.service';
 
 @Injectable()
 export class HelloProducerService {

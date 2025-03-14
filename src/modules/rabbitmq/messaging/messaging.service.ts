@@ -1,3 +1,6 @@
+/**
+ * @version 1.13.0
+ */
 import { AmqpConnection, MessageOptions } from '@golevelup/nestjs-rabbitmq';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Options } from 'amqplib';
@@ -12,8 +15,8 @@ export class MessagingService {
 
     }
 
-    publishMessage = <T>(exchange: string, routingKey: string, message: T, options: Options.Publish) => {
-        this.ampqConnection.publish(
+    async publishMessage <T>(exchange: string, routingKey: string, message: T, options: Options.Publish)  {
+        return this.ampqConnection.publish(
             exchange,
             routingKey,
             message,
