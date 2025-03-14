@@ -1,5 +1,5 @@
 # Boilerplate 
-version 1.12
+version 1.13-pre
 
 * nestjs
 * typeorm
@@ -9,6 +9,9 @@ version 1.12
 
 
 ## Changes
+
+### Versions 1.13
+* Add ListItems interface
 
 ### Version 1.12
 * Remove rabbitmq provisioning and enums

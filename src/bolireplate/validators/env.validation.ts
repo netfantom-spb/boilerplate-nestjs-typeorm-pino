@@ -2,15 +2,15 @@
  * 
  * @package boilerplate-nestjs-typeorm-pino
  * @summary validateEnvironmentVariables function
- * @version 1.6
+ * @version 1.13
  * @description Validates environemt variables
  * 
  */
-import { EnvironmentVariablesAppDto } from '@/bolireplate/types/dto/environment-variables.app.dto';
-import { plainToInstance, Transform, Type } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import {
   validateSync,
 } from 'class-validator';
+import { EnvironmentVariablesAppDto } from '../common/dto/environment-variables.app.dto';
 
 export const validateEnvironmentVariables = (
   config: Record<string, unknown>,
