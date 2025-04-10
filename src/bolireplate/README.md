@@ -5,7 +5,8 @@ version 1.13-pre
 * typeorm
 * nestjs-pino
 * dayjs
-* nestjs-prometheus
+* nestjs-promethe
+
 
 
 ## Changes
@@ -15,6 +16,9 @@ version 1.13-pre
 * Add boilerplate/utils/sleep
 * Fix build - ignore the "scrips" folder
 * Remove the 'test' tag from Swagger (global)
+*TODO*
+* Check for eslint using
+* Add "@typescript-eslint/no-floating-promises": "error" to eslint
 
 ### Version 1.12
 * Remove rabbitmq provisioning and enums
