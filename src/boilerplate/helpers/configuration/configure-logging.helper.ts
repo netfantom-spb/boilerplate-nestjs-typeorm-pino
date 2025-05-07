@@ -4,8 +4,8 @@
  * @version 1.13
  * @summary Returns Pino transport configuration based on environment va
  */
-import { LogLevelEnum } from '@/boilerplate/common/enums/log-level.enum';
-import { LogTypeEnum } from '@/boilerplate/common/enums/log-type.enum';
+import { LogLevelEnum } from '@/boilerplate/types/enums/log-level.enum';
+import { LogTypeEnum } from '@/boilerplate/types/enums/log-type.enum';
 import { ConfigService } from '@nestjs/config';
 import { Params } from 'nestjs-pino';
 import { v4 as uuidv4 } from 'uuid';
@@ -31,12 +31,24 @@ const configureLoggingTransport = (configService: ConfigService) => {
       config.push({
         level: logLevelFile,
         target: 'pino-pretty',
-        options: { destination: './logs/root.log', colorize: false },
+        options: {
+          destination: './logs/root.log',
+          colorize: false,
+          sync: false,
+          translateTime: 'yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
+          ignore: 'pid,hostname', // Игнорируем ненужные поля
+        },
       });
       config.push({
         level: 'error',
         target: 'pino-pretty',
-        options: { destination: './logs/error.log', colorize: false },
+        options: {
+          destination: './logs/error.log',
+          colorize: false,
+          sync: false,
+          translateTime: 'yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
+          ignore: 'pid,hostname', // Игнорируем ненужные поля
+        },
       });
       break;
     case LogTypeEnum.JSON:
