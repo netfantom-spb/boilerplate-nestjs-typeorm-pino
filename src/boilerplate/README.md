@@ -24,6 +24,7 @@ version 1.13-pre
 *TODO*
 * Check for eslint using
 * Add "@typescript-eslint/no-floating-promises": "error" to eslint
+* Extract app env variables to app folder
 
 ### Version 1.12
 * Remove rabbitmq provisioning and enums

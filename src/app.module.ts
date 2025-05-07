@@ -31,7 +31,7 @@ import { MetricsController } from './boilerplate/modules/metrics/metrics.control
 @Module({
   imports: [
     /**
-     * Load environment vaiables
+     * Load environment variables
      */
     ConfigModule.forRoot({
       envFilePath: ['.env.global', '.env'],
@@ -74,17 +74,19 @@ import { MetricsController } from './boilerplate/modules/metrics/metrics.control
     }),
 
     // Cache module
-    CacheModule.register(),
+    // CacheModule.register(),
 
-    // Shedule module
-    ScheduleModule.forRoot(),
+    // Schedule module
+    // ScheduleModule.forRoot(),
+
+    // RabbitMQ modules
+    // MessagingModule,
 
     // Example modules
     // TestModule,
     // TestExceptionsModule,
-    // MessagingModule,
     // HelloProducerModule,
-    MinutelyModule,
+    // MinutelyModule,
     // HelloConsumerModule,
   ],
   controllers: [AppController],
