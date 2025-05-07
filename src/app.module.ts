@@ -8,16 +8,16 @@ import {
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoggerMiddleware } from './bolireplate/middlewares/logger/logger.middleware';
+import { LoggerMiddleware } from './boilerplate/middlewares/logger/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
 import { TestModule } from './modules/api/test/test.module';
-import { validateEnvironmentVariables } from './bolireplate/validators/env.validation';
+import { validateEnvironmentVariables } from './boilerplate/validators/env.validation';
 
 import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
-import { configurePinoLoggerTargets } from './bolireplate/helpers/configuration/configure-logging.helper';
-import { configureDatabasePgHelper } from './bolireplate/helpers/configuration/configure-database-pg.helper';
+import { configurePinoLoggerTargets } from './boilerplate/helpers/configuration/configure-logging.helper';
+import { configureDatabasePgHelper } from './boilerplate/helpers/configuration/configure-database-pg.helper';
 import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
 import { MessagingModule } from './modules/rabbitmq/messaging/messaging.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -26,7 +26,7 @@ import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/
 import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
 import { DataSource } from 'typeorm';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-import { MetricsController } from './bolireplate/modules/metrics/metrics.controller';
+import { MetricsController } from './boilerplate/modules/metrics/metrics.controller';
 
 @Module({
   imports: [

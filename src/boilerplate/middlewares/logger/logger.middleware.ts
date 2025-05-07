@@ -1,7 +1,7 @@
 /**
  * @package boilerplate-nestjs-typeorm-pino
  * @summary configureLoggingTransport function
- * @version 1.6
+ * @version 1.13
  * @summary Returns Pino transport configuration based on environment va
  */
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
@@ -10,7 +10,12 @@ import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 export class LoggerMiddleware implements NestMiddleware {
   private logger = new Logger('API');
   use(req: Request, res: Response, next: () => void) {
-    this.logger.debug(req.url);
+    if (['/health', '/metics'].includes(req.url)) {
+      this.logger.verbose(req.url);
+    }
+    else {
+      this.logger.debug(req.url);
+    }
     next();
   }
 }

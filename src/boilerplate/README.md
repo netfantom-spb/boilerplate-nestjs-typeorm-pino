@@ -16,6 +16,11 @@ version 1.13-pre
 * Add boilerplate/utils/sleep
 * Fix build - ignore the "scrips" folder
 * Remove the 'test' tag from Swagger (global)
+* Rename "bolireplate" to "boilerplate"
+* Optimization logging - set logging to trace for /health and /metrics handle
+* fix misspelling in "boilerplate" folder
+* update logging datetime format
+
 *TODO*
 * Check for eslint using
 * Add "@typescript-eslint/no-floating-promises": "error" to eslint

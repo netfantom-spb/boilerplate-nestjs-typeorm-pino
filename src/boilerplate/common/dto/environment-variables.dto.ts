@@ -10,7 +10,7 @@ import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, Max, Min } from "cla
 import { LogLevelEnum } from "../enums/log-level.enum";
 import { NodeEnvEnum } from "../enums/node-env.enum";
 import { LogTypeEnum } from "../enums/log-type.enum";
-import { ToBoolean } from "@/bolireplate/decorators/to-boolean";
+import { ToBoolean } from "@/boilerplate/decorators/to-boolean";
 import { Expose } from "class-transformer";
 
 export class EnvironmentVariablesDto {

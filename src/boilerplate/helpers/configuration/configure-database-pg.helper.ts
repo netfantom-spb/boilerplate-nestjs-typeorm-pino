@@ -5,7 +5,7 @@
  * @description  Configure PostgreSQL database connection
  */
 
-import { TypeOrmLoggerContainer } from '@/bolireplate/utils/type-orm-logger';
+import { TypeOrmLoggerContainer } from '@/boilerplate/utils/type-orm-logger';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
