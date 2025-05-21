@@ -12,6 +12,7 @@ version 1.13-pre
 ## Changes
 
 ### Versions 1.13
+* Add npm packages: axios-retry
 * Add ListItems interface
 * Add boilerplate/utils/sleep
 * Fix build - ignore the "scrips" folder
@@ -20,6 +21,7 @@ version 1.13-pre
 * fix misspelling in "boilerplate" folder
 * update logging datetime format
 * update npm packages
+* Add axiosWithRetryHelper
 
 *TODO*
 * Check for eslint using
