@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { HelloProducerService } from './hello-producer.service';
-import { MessagingModule } from '../../messaging.module';
+import { MessagingModule } from '../../../../boilerplate/modules/messaging/messaging.module';
 
 @Module({
   providers: [HelloProducerService],

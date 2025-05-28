@@ -1,5 +1,5 @@
-import { ErrorCodeEnum } from "@/bolireplate/exceptions/error-code.enum";
-import { ServerException } from "@/bolireplate/exceptions/exception";
+import { ErrorCodeEnum } from "@/boilerplate/exceptions/error-code.enum";
+import { ServerException } from "@/boilerplate/exceptions/exception";
 
 export class TestServerException extends ServerException {
     constructor(id: number) {

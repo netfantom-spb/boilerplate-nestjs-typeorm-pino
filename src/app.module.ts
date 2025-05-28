@@ -1,6 +1,4 @@
 import {
-  Inject,
-  Logger,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -8,30 +6,21 @@ import {
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoggerMiddleware } from './bolireplate/middlewares/logger/logger.middleware';
+import { LoggerMiddleware } from './boilerplate/middlewares/logger/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ScheduleModule } from '@nestjs/schedule';
-import { CacheModule } from '@nestjs/cache-manager';
-import { TestModule } from './modules/api/test/test.module';
-import { validateEnvironmentVariables } from './bolireplate/validators/env.validation';
-
-import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
-import { configurePinoLoggerTargets } from './bolireplate/helpers/configuration/configure-logging.helper';
-import { configureDatabasePgHelper } from './bolireplate/helpers/configuration/configure-database-pg.helper';
-import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
-import { MessagingModule } from './modules/rabbitmq/messaging.module';
+import { validateEnvironmentVariables } from './boilerplate/validators/env.validation';
+import { configurePinoLoggerTargets } from './boilerplate/helpers/configuration/configure-logging.helper';
+import { configureDatabasePgHelper } from './boilerplate/helpers/configuration/configure-database-pg.helper';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
-import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/hello-peducer.module';
-import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
-import { DataSource } from 'typeorm';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-import { MetricsController } from './bolireplate/modules/metrics/metrics.controller';
+import { MetricsController } from './boilerplate/modules/metrics/metrics.controller';
+import { SERVICE_NAME } from '@/boilerplate/app/configs/app.config';
 
 @Module({
   imports: [
     /**
-     * Load environment vaiables
+     * Load environment variables
      */
     ConfigModule.forRoot({
       envFilePath: ['.env.global', '.env'],
@@ -57,7 +46,7 @@ import { MetricsController } from './bolireplate/modules/metrics/metrics.control
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
         configureDatabasePgHelper(configService, {
-          applicationName: 'example-application-name',
+          applicationName: SERVICE_NAME,
           synchronize: false,
         }),
     }),
@@ -74,17 +63,19 @@ import { MetricsController } from './bolireplate/modules/metrics/metrics.control
     }),
 
     // Cache module
-    CacheModule.register(),
+    // CacheModule.register(),
 
-    // Shedule module
-    ScheduleModule.forRoot(),
+    // Schedule module
+    // ScheduleModule.forRoot(),
+
+    // RabbitMQ modules
+    // MessagingModule,
 
     // Example modules
     // TestModule,
     // TestExceptionsModule,
-    // MessagingModule,
     // HelloProducerModule,
-    MinutelyModule,
+    // MinutelyModule,
     // HelloConsumerModule,
   ],
   controllers: [AppController],

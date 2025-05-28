@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTestExceptionDto } from './dto/create-test-exception.dto';
 import { UpdateTestExceptionDto } from './dto/update-test-exception.dto';
-import { ServerException } from '@/bolireplate/exceptions/exception';
+import { ServerException } from '@/boilerplate/exceptions/exception';
 import { TestServerException } from './exceptions/test-server-exception';
 
 @Injectable()

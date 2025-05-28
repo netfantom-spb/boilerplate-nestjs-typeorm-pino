@@ -7,8 +7,8 @@ import { TestDto } from './dto/test.dto';
 import { plainToInstance } from 'class-transformer';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { TestEntity } from './entities/test.entity';
-import { NotFoundException, ServerException } from '@/bolireplate/exceptions/exception';
-import { ErrorCodeEnum } from '@/bolireplate/exceptions/error-code.enum';
+import { NotFoundException, ServerException } from '@/boilerplate/exceptions/exception';
+import { ErrorCodeEnum } from '@/boilerplate/exceptions/error-code.enum';
 
 @Injectable()
 export class TestService implements OnModuleInit {

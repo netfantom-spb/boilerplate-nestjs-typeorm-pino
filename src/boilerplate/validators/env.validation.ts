@@ -10,7 +10,7 @@ import { plainToInstance } from 'class-transformer';
 import {
   validateSync,
 } from 'class-validator';
-import { EnvironmentVariablesAppDto } from '../common/dto/environment-variables.app.dto';
+import { EnvironmentVariablesAppDto } from '../app/dto/environment-variables.app.dto';
 
 export const validateEnvironmentVariables = (
   config: Record<string, unknown>,
