@@ -1,12 +1,18 @@
 # Boilerplate 
-version 1.13-pre
+version 1.13
 
 * nestjs
 * typeorm
 * nestjs-pino
 * dayjs
-* nestjs-promethe
+* nestjs-prometheus
+* @golevelup/nestjs-rabbitmq
 
+
+## *TODO*
+* Check for eslint using
+* Add "@typescript-eslint/no-floating-promises": "error" to eslint
+* Improve Dockerfile
 
 
 ## Changes
@@ -24,11 +30,7 @@ version 1.13-pre
 * Add axiosWithRetryHelper
 * Add alias @boilerplate
 * Add @boilerplate/app for Application consts and dto
-
-*TODO*
-* Check for eslint using
-* Add "@typescript-eslint/no-floating-promises": "error" to eslint
-* Improve Dockerfile
+* Improve messaging module
 
 ### Version 1.12
 * Remove rabbitmq provisioning and enums

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { HelloConsumerService } from './hello-consumer.service';
-import { MessagingModule } from '../../messaging/messaging.module';
+import { MessagingModule } from '../../../../boilerplate/modules/messaging/messaging.module';
 
 @Module({
   providers: [HelloConsumerService],

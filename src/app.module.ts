@@ -15,7 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { MetricsController } from './boilerplate/modules/metrics/metrics.controller';
-import { SERVICE_NAME } from '@boilerplate/app/consts/consts';
+import { SERVICE_NAME } from '@/boilerplate/app/configs/app.config';
 
 @Module({
   imports: [

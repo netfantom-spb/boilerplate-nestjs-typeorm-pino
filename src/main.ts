@@ -10,7 +10,7 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '@boilerplate/filters/http-exception.filter';
-import { SERVICE_FULL_NAME } from '@/boilerplate/app/consts/consts';
+import { SERVICE_FULL_NAME } from '@/boilerplate/app/configs/app.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
