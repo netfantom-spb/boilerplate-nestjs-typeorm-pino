@@ -21,7 +21,8 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@boilerplate/*": ["./src/boilerplate/*"],
     }
   }
 }

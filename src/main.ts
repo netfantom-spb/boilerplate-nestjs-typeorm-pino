@@ -9,8 +9,8 @@ import {
   SwaggerDocumentOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
-import { HttpExceptionFilter } from './boilerplate/filters/http-exception.filter';
-import { DataSource } from 'typeorm';
+import { HttpExceptionFilter } from '@boilerplate/filters/http-exception.filter';
+import { SERVICE_FULL_NAME } from '@/boilerplate/app/consts/consts';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -18,7 +18,7 @@ async function bootstrap() {
     bufferLogs: true,
     autoFlushLogs: true,
     forceCloseConnections: true,
-    snapshot: true,
+    snapshot: false,
     abortOnError: true,
   });
 
@@ -38,7 +38,7 @@ async function bootstrap() {
 
   // Swagger configuration
   const swaggerConfig = new DocumentBuilder()
-      .setTitle('Service example')
+      .setTitle(`${SERVICE_FULL_NAME}`)
       .setDescription('The example API description')
       .setVersion('1.0')
       .build(),

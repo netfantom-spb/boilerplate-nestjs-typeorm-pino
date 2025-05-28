@@ -1,6 +1,4 @@
 import {
-  Inject,
-  Logger,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -10,23 +8,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './boilerplate/middlewares/logger/logger.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ScheduleModule } from '@nestjs/schedule';
-import { CacheModule } from '@nestjs/cache-manager';
-import { TestModule } from './modules/api/test/test.module';
 import { validateEnvironmentVariables } from './boilerplate/validators/env.validation';
-
-import { TestExceptionsModule } from './modules/api/test-exceptions/test-exceptions.module';
 import { configurePinoLoggerTargets } from './boilerplate/helpers/configuration/configure-logging.helper';
 import { configureDatabasePgHelper } from './boilerplate/helpers/configuration/configure-database-pg.helper';
-import { MinutelyModule } from './modules/schedulers/minutely/minutely.module';
-import { MessagingModule } from './modules/rabbitmq/messaging/messaging.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerModule } from 'nestjs-pino';
-import { HelloProducerModule } from './modules/rabbitmq/producers/hello-message/hello-peducer.module';
-import { HelloConsumerModule } from './modules/rabbitmq/consumers/hello-consumer/hello-consumer.module';
-import { DataSource } from 'typeorm';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { MetricsController } from './boilerplate/modules/metrics/metrics.controller';
+import { SERVICE_NAME } from '@boilerplate/app/consts/consts';
 
 @Module({
   imports: [
@@ -57,7 +46,7 @@ import { MetricsController } from './boilerplate/modules/metrics/metrics.control
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
         configureDatabasePgHelper(configService, {
-          applicationName: 'example-application-name',
+          applicationName: SERVICE_NAME,
           synchronize: false,
         }),
     }),

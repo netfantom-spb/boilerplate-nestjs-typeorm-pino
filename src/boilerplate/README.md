@@ -22,11 +22,12 @@ version 1.13-pre
 * update logging datetime format
 * update npm packages
 * Add axiosWithRetryHelper
+* Add alias @boilerplate
+* Add @boilerplate/app for Application consts and dto
 
 *TODO*
 * Check for eslint using
 * Add "@typescript-eslint/no-floating-promises": "error" to eslint
-* Extract app env variables to app folder
 * Improve Dockerfile
 
 ### Version 1.12

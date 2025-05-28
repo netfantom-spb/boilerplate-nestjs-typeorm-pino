@@ -7,8 +7,7 @@
  * 
  */
 
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { Injectable } from '@nestjs/common';
 import { APP_NAME, APP_VERSION, APP_BUILD_DATE } from './version';
 
 @Injectable()
