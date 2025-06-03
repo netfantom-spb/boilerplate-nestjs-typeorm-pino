@@ -1,17 +1,16 @@
-
 /**
  * @package boilerplate-nestjs-typeorm-pino
  * @summary Main logger
  * @version 1.6
- * @description  
+ * @description
  * Do not change this file
  * Effectively ripped out from:
  * https://github.com/typeorm/typeorm/blob/master/src/logger/SimpleConsoleLogger.ts
  */
 
-import { Logger as TypeOrmLogger, QueryRunner } from "typeorm";
-import { LoggerOptions as TypeOrmLoggerOptions } from "typeorm/logger/LoggerOptions";
-import { Logger } from "@nestjs/common";
+import { Logger as TypeOrmLogger, QueryRunner } from 'typeorm';
+import { LoggerOptions as TypeOrmLoggerOptions } from 'typeorm/logger/LoggerOptions';
+import { Logger } from '@nestjs/common';
 
 /**
 
@@ -32,16 +31,16 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
    */
   logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
     if (
-      this._options === "all" ||
+      this._options === 'all' ||
       this._options === true ||
-      (this._options instanceof Array && this._options.indexOf("query") !== -1)
+      (this._options instanceof Array && this._options.indexOf('query') !== -1)
     ) {
       const sql =
         query +
         (parameters && parameters.length
-          ? " -- PARAMETERS: " + this.stringifyParams(parameters)
-          : "");
-      this._logger.debug("query" + ": " + sql);
+          ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+          : '');
+      this._logger.debug('query' + ': ' + sql);
     }
   }
 
@@ -55,15 +54,15 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
     queryRunner?: QueryRunner,
   ) {
     if (
-      this._options === "all" ||
+      this._options === 'all' ||
       this._options === true ||
-      (this._options instanceof Array && this._options.indexOf("error") !== -1)
+      (this._options instanceof Array && this._options.indexOf('error') !== -1)
     ) {
       const sql =
         query +
         (parameters && parameters.length
-          ? " -- PARAMETERS: " + this.stringifyParams(parameters)
-          : "");
+          ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+          : '');
       this._logger.debug(`query failed: ` + sql);
       this._logger.error(`error:`, error);
     }
@@ -81,8 +80,8 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
     const sql =
       query +
       (parameters && parameters.length
-        ? " -- PARAMETERS: " + this.stringifyParams(parameters)
-        : "");
+        ? ' -- PARAMETERS: ' + this.stringifyParams(parameters)
+        : '');
     this._logger.debug(`query is slow: ` + sql);
     this._logger.debug(`execution time: ` + time);
   }
@@ -92,8 +91,8 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
    */
   logSchemaBuild(message: string, queryRunner?: QueryRunner) {
     if (
-      this._options === "all" ||
-      (this._options instanceof Array && this._options.indexOf("schema") !== -1)
+      this._options === 'all' ||
+      (this._options instanceof Array && this._options.indexOf('schema') !== -1)
     ) {
       this._logger.debug(message);
     }
@@ -110,29 +109,29 @@ export class TypeOrmLoggerContainer implements TypeOrmLogger {
    * Perform logging using given logger, or by default to the this._logger.
    * Log has its own level and message.
    */
-  log(level: "log" | "info" | "warn", message: any, queryRunner?: QueryRunner) {
+  log(level: 'log' | 'info' | 'warn', message: any, queryRunner?: QueryRunner) {
     switch (level) {
-      case "log":
+      case 'log':
         if (
-          this._options === "all" ||
+          this._options === 'all' ||
           (this._options instanceof Array &&
-            this._options.indexOf("log") !== -1)
+            this._options.indexOf('log') !== -1)
         )
           this._logger.log(message);
         break;
-      case "info":
+      case 'info':
         if (
-          this._options === "all" ||
+          this._options === 'all' ||
           (this._options instanceof Array &&
-            this._options.indexOf("info") !== -1)
+            this._options.indexOf('info') !== -1)
         )
           this._logger.debug(message);
         break;
-      case "warn":
+      case 'warn':
         if (
-          this._options === "all" ||
+          this._options === 'all' ||
           (this._options instanceof Array &&
-            this._options.indexOf("warn") !== -1)
+            this._options.indexOf('warn') !== -1)
         )
           this._logger.warn(message);
         break;
