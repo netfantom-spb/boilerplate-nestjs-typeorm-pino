@@ -39,7 +39,7 @@ RUN ln -s /etc/periodic/daily/logrotate /etc/periodic/15min/logrotate
 WORKDIR /app
 COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} --chmod=711 ["wait-for-it.sh", "./"]
 COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} ["./package.json", "./package-lock.json", "./"]
-RUN npm i --omit=dev --silent
+RUN npm ci --omit=dev --silent
 COPY --chown=${DOCKER_USERNAME}:${DOCKER_GROUPNAME} --from=builder /build/backend/dist ./
 # Start services
 USER ${DOCKER_USER}:${DOCKER_GROUP}

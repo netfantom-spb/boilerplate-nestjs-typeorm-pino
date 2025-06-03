@@ -20,7 +20,7 @@ export class MessagingService {
     routingKey,
     message,
     options,
-    validate = true,
+    validate = false,
     validatorOptions = {},
   }: {
     exchange: string;
@@ -39,12 +39,11 @@ export class MessagingService {
         forbidNonWhitelisted: true,
         forbidUnknownValues: true,
         always: false,
-        ...validatorOptions
-      })
-      .catch((errors) => {
+        ...validatorOptions,
+      }).catch((errors) => {
         this.logger.error(errors);
         throw new Error('Message validation failed');
-      })
+      });
     }
     return this.ampqConnection.publish(exchange, routingKey, message, options);
   }

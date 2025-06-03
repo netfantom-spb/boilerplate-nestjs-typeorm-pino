@@ -1,5 +1,5 @@
 # Boilerplate 
-version 1.13
+version 1.14
 
 * nestjs
 * typeorm
@@ -17,7 +17,11 @@ version 1.13
 
 ## Changes
 
-### Versions 1.13
+### Version 1.14
+* Migrate to nestjs-boilerplate-schematics
+* Remove old modules examples
+
+### Version 1.13
 * Add npm packages: axios-retry
 * Add ListItems interface
 * Add boilerplate/utils/sleep

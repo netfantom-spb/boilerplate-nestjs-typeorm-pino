@@ -62,21 +62,22 @@ import { SERVICE_NAME } from '@/boilerplate/app/configs/app.config';
       },
     }),
 
-    // Cache module
-    // CacheModule.register(),
+    /**
+     * Cache module
+     */
+    // CacheModule.register({
+    //   isGlobal: true,
+    // }),
 
-    // Schedule module
+    /**
+     * Schedule modules
+     */
     // ScheduleModule.forRoot(),
 
-    // RabbitMQ modules
+    /**
+     * RabbitMQ modules
+     */
     // MessagingModule,
-
-    // Example modules
-    // TestModule,
-    // TestExceptionsModule,
-    // HelloProducerModule,
-    // MinutelyModule,
-    // HelloConsumerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

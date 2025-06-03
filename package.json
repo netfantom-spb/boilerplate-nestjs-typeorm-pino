@@ -1,6 +1,6 @@
 {
   "name": "nestjs-typeorm-pino-swagger-boilerplate",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Boilerplate NestJS + TypeOrm + Pino + Swagger",
   "author": "Viktor Egorov",
   "repository": {
@@ -77,7 +77,8 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "nestjs-boilerplate-schematics": "^0.1.0"
   },
   "jest": {
     "moduleFileExtensions": [
