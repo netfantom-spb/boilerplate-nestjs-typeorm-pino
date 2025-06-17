@@ -1,19 +1,19 @@
 # Builder
-FROM node:20-alpine3.21 AS builder
+FROM node:20-alpine3.22 AS builder
 RUN apk update && \
     apk upgrade && \
     apk add tzdata && \
     cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 RUN npm -g update npm
 WORKDIR /build/backend
-COPY ["./package.json", "./package-lock.json", "./tsconfig.json", "./tsconfig.build.json", "./"]
-RUN npm i
+COPY ["./package.json", "./package-lock.json", "./tsconfig.json", "./tsconfig.build.json", "./nest-cli.json", "./"]
+RUN npm ci
 COPY ./src ./src
 COPY ./scripts ./scripts
 RUN npm run build
 
 # Service
-FROM node:20-alpine3.21
+FROM node:20-alpine3.22
 ARG DOCKER_USER
 ARG DOCKER_GROUP
 ARG DOCKER_USERNAME
