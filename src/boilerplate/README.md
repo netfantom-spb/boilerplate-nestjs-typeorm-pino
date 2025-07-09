@@ -21,7 +21,10 @@ version 1.14
   *  upgrade alpine to 2.2
   *  add "./nest-cli.json" for build stage
   *  "npm ci" instead of "npm i"
-* Improve logging in main.ts
+* Improve logging 
+  * Add logging main.ts
+  * Improve configureLoggingTransport and fix wrong timezone in logs
+* Improve logrotate
 
 ### Version 1.14
 * Migrate to nestjs-boilerplate-schematics

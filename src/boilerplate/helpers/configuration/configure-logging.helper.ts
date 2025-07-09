@@ -1,7 +1,7 @@
 /**
  * @package boilerplate-nestjs-typeorm-pino
  * @summary configureLoggingTransport function
- * @version 1.15
+ * @version 1.15.1
  * @summary Returns Pino transport configuration based on environment va
  */
 import { LogLevelEnum } from '@/boilerplate/common/enums/log-level.enum';
@@ -35,7 +35,7 @@ const configureLoggingTransport = (configService: ConfigService) => {
           destination: './logs/root.log',
           colorize: false,
           sync: false,
-          translateTime: 'yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
           ignore: 'pid,hostname', // Игнорируем ненужные поля
         },
       });
@@ -46,7 +46,7 @@ const configureLoggingTransport = (configService: ConfigService) => {
           destination: './logs/error.log',
           colorize: false,
           sync: false,
-          translateTime: 'yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
           ignore: 'pid,hostname', // Игнорируем ненужные поля
         },
       });
@@ -57,11 +57,13 @@ const configureLoggingTransport = (configService: ConfigService) => {
           level: logLevelFile,
           target: 'pino/file',
           options: { destination: './logs/root.log' },
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
         },
         {
           level: 'error',
           target: 'pino/file',
           options: { destination: './logs/error.log' },
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
         },
       );
       break;
@@ -80,7 +82,7 @@ const configureLoggingTransport = (configService: ConfigService) => {
           colorizeObjects: true,
           singleLine: false,
           sync: false,
-          translateTime: 'yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
           ignore: 'pid,hostname', // Игнорируем ненужные поля
         },
       });
@@ -91,6 +93,7 @@ const configureLoggingTransport = (configService: ConfigService) => {
         target: 'pino/file',
         options: {
           destination: 1,
+          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l', // Добавляем дату и время
         },
       });
       break;
